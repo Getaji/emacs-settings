@@ -29,9 +29,7 @@
 
 ; User
 (depends-on "init-loader")
-(depends-on "pallet")
 (depends-on "highlight-symbol")
 (depends-on "sequential-command")
 (depends-on "helm")
 (depends-on "whitespace")
-(depends-on "magit")
