@@ -1,0 +1,133 @@
+; Package ======================================================================
+(require 'package)
+
+; package-archivesに追加
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+; 初期化
+(package-initialize)
+
+; melpa.el(動かない)
+; (require 'melpa)
+
+; helm
+(add-to-list 'load-path "%APPDATA%/.emacs.d/emacs-async")
+(add-to-list 'load-path "%APPDATA%/.emacs.d/helm")
+(require 'helm-config)
+
+; Cask
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+(require 'pallet)
+
+; auto-complete =============================================================
+(add-hook 'emacs-lisp-mode-hook '(lambda ()
+                                   (require 'auto-complete)
+                                   (auto-complete-mode t)))
+(add-hook 'scheme-other-window '(lambda ()
+				  (require 'auto-complete)
+				  (auto-complete-mode t)))
+(require 'auto-complete-config)
+(ac-config-default)
+
+; View config===================================================================
+;; font
+(set-face-attribute 'default nil
+            :family "Consolas" ;; font
+            :height 110)       ;; font size
+(set-fontset-font
+ nil 'japanese-jisx0208
+ (font-spec :family "Meiryo"
+	    :height: 90))      ;; font
+
+;; color
+(load-theme 'tangotango t)
+
+;; hlinum
+(require 'hlinum)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" default)))
+ '(global-linum-mode t)
+ '(smooth-scroll/vscroll-step-size 1))
+(hlinum-activate)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(linum-highlight-face ((t (:foreground "white" :background "black")))))
+
+;; scroll
+(require 'smooth-scroll)
+(smooth-scroll-mode t)
+
+;; Expand region ==============================================================
+(require 'expand-region)
+(global-set-key (kbd "C-@") 'er/expand-region)
+(global-set-key (kbd "C-M-@") 'er/contract-region) ;; リージョンを狭める
+
+;; transient-mark-modeが nilでは動作しませんので注意
+(transient-mark-mode t)
+
+;; Rainbow Delimiters =========================================================
+(require 'rainbow-delimiters)
+(add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
+
+;; Scheme and Gauche ==========================================================
+;; 対応する括弧を表示する
+(show-paren-mode t)
+
+;; *.~ とかのバックアップファイルを作らない
+(setq make-backup-files nil)
+
+;; .#* とかのバックアップファイルを作らない 
+(setq auto-save-default nil)
+ 
+;; ^H を バックスペースへ
+(global-set-key "\C-h" 'delete-backward-char)
+
+;; 括弧の補完
+(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
+(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
+(setq skeleton-pair 1)
+
+;; emacsでGauche
+(setq process-coding-system-alist
+      (cons '("gosh" utf-8 . utf-8) process-coding-system-alist))
+(setq scheme-program-name "gosh -i")
+
+(autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
+(autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
+
+(defun scheme-other-window ()
+  "Run Gauche on other window"
+  (interactive)
+  ;(split-window-vertically (/ (frame-width) 2))
+  (let ((buf-name (buffer-name (current-buffer))))
+    (scheme-mode)
+    (switch-to-buffer-other-window
+     (get-buffer-create "*scheme*"))
+    (run-scheme scheme-program-name)
+    (switch-to-buffer-other-window
+     (get-buffer-create buf-name))))
+
+(define-key global-map
+  "\C-cG" 'scheme-other-window)(setq process-coding-system-alist
+      (cons '("gosh" utf-8 . utf-8) process-coding-system-alist))
+; 処理系
+(setq scheme-program-name "gosh -i")
+(autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
+(autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
+
+(require 'init-loader)
+(init-loader-load "~/.emacs.d/inits")
