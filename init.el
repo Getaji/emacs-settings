@@ -6,17 +6,6 @@
 
 (require 'use-package)
 
-; auto-complete =============================================================
-(use-package auto-complete
-  :config
-  (global-auto-complete-mode t))
-(use-package auto-complete-config
-  :config
-  (ac-config-default))
-
-; View config===================================================================
-;; hlinum
-
 ;; scroll
 (use-package smooth-scroll
   :config
