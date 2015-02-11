@@ -29,8 +29,8 @@
                                    (require 'auto-complete)
                                    (auto-complete-mode t)))
 (add-hook 'scheme-other-window '(lambda ()
-				  (require 'auto-complete)
-				  (auto-complete-mode t)))
+                                  (require 'auto-complete)
+                                  (auto-complete-mode t)))
 (require 'auto-complete-config)
 (ac-config-default)
 
@@ -42,7 +42,7 @@
 (set-fontset-font
  nil 'japanese-jisx0208
  (font-spec :family "Meiryo"
-	    :height: 90))      ;; font
+            :height: 90))      ;; font
 
 ;; color
 (load-theme 'tangotango t)
