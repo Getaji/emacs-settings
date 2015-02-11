@@ -5,9 +5,9 @@
 ;; *.~ とかのバックアップファイルを作らない
 (setq make-backup-files nil)
 
-;; .#* とかのバックアップファイルを作らない 
+;; .#* とかのバックアップファイルを作らない
 (setq auto-save-default nil)
- 
+
 ;; ^H を バックスペースへ
 (global-set-key "\C-h" 'delete-backward-char)
 
@@ -45,3 +45,8 @@
 (setq scheme-program-name "gosh -i")
 (autoload 'scheme-mode "cmuscheme" "Major mode for Scheme." t)
 (autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
+
+(defun scheme-mode-hooks ()
+  (smart-newline-mode t))
+
+(add-hook 'scheme-mode-hook 'scheme-mode-hooks)

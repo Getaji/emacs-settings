@@ -1,2 +1,1 @@
-(setq auto-mode-alist
- (cons (cons "^Cask$" 'emacs-lisp-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\Cask?\\'" . emacs-lisp-mode))
