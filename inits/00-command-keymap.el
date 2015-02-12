@@ -1,1 +1,1 @@
-(keyboard-translate ?\C-h ?\C-?))
+(keyboard-translate ?\C-h ?\C-?)
