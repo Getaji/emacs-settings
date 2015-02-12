@@ -1,3 +1,4 @@
-(defun emacs-lisp-mode-hook ())
-(use-package auto-complete
+(use-package emacs-lisp
+  :mode (("\\.el" . emacs-lisp-mode))
+  :config
   )
