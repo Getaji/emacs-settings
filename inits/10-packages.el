@@ -1,5 +1,6 @@
 (add-to-list 'load-path "%APPDATA%/.emacs.d/emacs-async")
 (add-to-list 'load-path "%APPDATA%/.emacs.d/helm")
+(add-to-list 'load-path "%APPDATA%/.emacs.d/elisps")
 
 (use-package package
   :config
