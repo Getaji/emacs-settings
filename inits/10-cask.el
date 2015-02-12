@@ -1,1 +1,4 @@
-(add-to-list 'auto-mode-alist '("\\Cask?\\'" . emacs-lisp-mode))
+(use-package cask
+  :mode (("\\Cask" . emacs-lisp-mode))
+  :config
+  )
