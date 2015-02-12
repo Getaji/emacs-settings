@@ -1,3 +1,3 @@
-(defun after-save-hooks ()
+(defun before-save-hooks ()
   (untabify (point-min) (point-max)))
-(add-hook 'after-save-hook 'after-save-hooks)
+(add-hook 'before-save-hook 'before-save-hooks)
