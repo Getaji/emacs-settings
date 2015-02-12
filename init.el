@@ -1,4 +1,9 @@
-;a
+; inits Rule
+;
+; 10~ Package (cask)
+; 20~ Helm
+; 30~ View
+; 40~ Packages
 
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
