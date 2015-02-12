@@ -7,11 +7,11 @@
 ;; font
 (set-face-attribute 'default nil
             :family "Consolas" ;; font
-            :height 110)       ;; font size
+            :height 109)       ;; font size
 (set-fontset-font
  nil 'japanese-jisx0208
- (font-spec :family "Meiryo"
-            :height: 90))      ;; font
+ (font-spec :family "Arial"
+            :height: 90))
 
 ;; color
 (load-theme 'tangotango t)
