@@ -1,8 +1,19 @@
-(require 'helm)
-(require 'helm-config)
-(require 'helm-mode)
+;(require 'helm-config)
+;(require 'helm-mode)
 
-(require 'helm-descbinds)
+;(require 'helm-descbinds)
 
-
-; (global-set-key (kbd "C-;") 'helm-for-files)
+(use-package helm
+  :commands (helm-mini)
+  :bind (("C-M-;" . helm-mini))
+  :defer t
+  :config
+  )
+(use-package helm-swoop
+  :commands (helm-swoop)
+  :defer t
+  :config
+  )
+(use-package helm-migemo
+  :defer t
+  :config)
