@@ -15,3 +15,6 @@
 
 ;; color
 (load-theme 'tangotango t)
+(global-hl-line-mode 1)
+(set-face-background hl-line-face "gray13")
+(set-cursor-color "orange")
